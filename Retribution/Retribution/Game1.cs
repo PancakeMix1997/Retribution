@@ -33,7 +33,7 @@ namespace Retribution
 
             Entities.Entity temp = new Entities.Entity();
             temp.AddComponent(new Entities.Components.SpriteRenderer(Content.Load<Texture2D>("Suisidal Juice pigv5"), temp));
-            
+            temp.AddComponent(new Entities.Components.PlayerController(temp));
 
             layer.addEntity(temp);
         }

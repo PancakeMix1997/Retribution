@@ -24,6 +24,11 @@ namespace Retribution.Entities
             return pos;
         }
 
+        public void Move(Vector2 dir)
+        {
+            pos += dir;
+        }
+
         public void SetPos(Vector2 position)
         {
             pos = position;

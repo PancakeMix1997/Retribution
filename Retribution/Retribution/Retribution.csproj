@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\Components\Component.cs" />
+    <Compile Include="Entities\Components\PlayerController.cs" />
     <Compile Include="Entities\Components\SpriteRenderer.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\SceneGraph.cs" />

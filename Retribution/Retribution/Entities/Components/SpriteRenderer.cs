@@ -6,13 +6,12 @@ namespace Retribution.Entities.Components
     class SpriteRenderer : Component
     {
         private Texture2D m_tex;
-        private Entity m_entity;
+        
         private Rectangle m_destRect;
 
-        public SpriteRenderer(Texture2D tex, Entity entity)
+        public SpriteRenderer(Texture2D tex, Entity entity) : base(entity)
         {
             m_tex = tex;
-            m_entity = entity;
             m_destRect.Width = tex.Width;
             m_destRect.Height = tex.Height;
         }
