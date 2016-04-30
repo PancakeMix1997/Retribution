@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Map>
+    <Backround>
+        CreepyCave
+    </Backround>
+
+    <TileSheet SheetName = "DungeonSheet">
+      <Tile>
+        <Number>1</Number>
+        <X>0</X>
+        <Y>0</Y>
+        <Width>40</Width>
+        <Height>40</Height>
+      </Tile>
+      <Tile>
+        <Number>2</Number>
+        <X>40</X>
+        <Y>0</Y>
+        <Width>100</Width>
+        <Height>40</Height>
+      </Tile>
+    </TileSheet>
+
+    <Static>
+    1,2,1,0,0,0,1,1,1,0,0,0,1,1
+    </Static>
+</Map>

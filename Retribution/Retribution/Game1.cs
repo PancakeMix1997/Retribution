@@ -47,7 +47,7 @@ namespace Retribution
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            sceneGraph.Update(gameTime.ElapsedGameTime.Milliseconds);
+            sceneGraph.Update(gameTime.ElapsedGameTime.Milliseconds/1000);
 
             base.Update(gameTime);
         }

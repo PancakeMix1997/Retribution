@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Retribution.Entities.Components
@@ -19,7 +14,22 @@ namespace Retribution.Entities.Components
             KeyboardState newState = Keyboard.GetState();
             if(newState.IsKeyDown(Keys.W))
             {
-                m_entity.Move(new Microsoft.Xna.Framework.Vector2(10, 10));
+                m_entity.Move(0, -10);
+            }
+
+            if (newState.IsKeyDown(Keys.S))
+            {
+                m_entity.Move(0, 10);
+            }
+
+            if (newState.IsKeyDown(Keys.A))
+            {
+                m_entity.Move(-10,0);
+            }
+
+            if(newState.IsKeyDown(Keys.D))
+            {
+                m_entity.Move(10, 0);
             }
         }
 

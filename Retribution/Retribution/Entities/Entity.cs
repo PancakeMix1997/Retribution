@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -22,6 +18,12 @@ namespace Retribution.Entities
         public Vector2 GetPos()
         {
             return pos;
+        }
+
+        public void Move(float dirx, float diry)
+        {
+            pos.X += dirx;
+            pos.Y += diry;
         }
 
         public void Move(Vector2 dir)

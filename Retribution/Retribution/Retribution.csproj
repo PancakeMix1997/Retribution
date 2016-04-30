@@ -45,6 +45,8 @@
     <Compile Include="Entities\SceneGraph.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Entities\Layer.cs" />
+    <Compile Include="Management\MapLoader.cs" />
+    <Compile Include="Management\ResourceManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
+    <Content Include="Maps\Level1.xml" />
     <Content Include="OpenTK.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
