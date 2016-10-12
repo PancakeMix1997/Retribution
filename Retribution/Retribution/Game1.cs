@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Retribution.Entities.Components;
 
 namespace Retribution
 {
@@ -9,7 +10,9 @@ namespace Retribution
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Entities.SceneGraph sceneGraph;
+        Entities.Map map;
+        Management.MapLoader maploader;
+        Entities.HealthBar healthBar;
 
         public Game1()
         {
@@ -26,16 +29,35 @@ namespace Retribution
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            sceneGraph = new Entities.SceneGraph();
+            map = new Entities.Map();
+            maploader = new Management.MapLoader();
+            Management.ResourceManager.Init(Content);
+            maploader.Load(map, "C:/Users/Raymond/Documents/Visual Studio 2015/Projects/Retribution/Retribution/Maps/Level1.xml");
 
-            sceneGraph.NewLayer();
-            Entities.Layer layer = sceneGraph.GetLayer(0);
+            map.NewLayer();
+            Entities.Layer layer = map.GetLayer(0);
 
-            Entities.Entity temp = new Entities.Entity();
-            temp.AddComponent(new Entities.Components.SpriteRenderer(Content.Load<Texture2D>("Suisidal Juice pigv5"), temp));
+
+
+            Entities.Entity temp = new Entities.Entity("player", "Good");
+            temp.SetPos(new Vector2(0, 0));
+            temp.AddComponent(new Entities.Components.SpriteRenderer(Content.Load<Texture2D>("TestPlayer"), true,temp));
             temp.AddComponent(new Entities.Components.PlayerController(temp));
+            temp.AddComponent(new Entities.Components.AABBCollider(temp, map, true));
+
+            healthBar = new Entities.HealthBar(temp, Content.Load<Texture2D>("FullHealth"), Content.Load<Texture2D>("2ThirdsHealth"), Content.Load<Texture2D>("LowHealth"));
 
             layer.addEntity(temp);
+
+            temp = new Entities.Entity("Enemy", "Bad");
+            temp.SetPos(new Vector2(100, 0));
+            temp.AddComponent(new Entities.Components.SpriteRenderer(Content.Load<Texture2D>("testEnemy"), true, temp));
+            temp.AddComponent(new Entities.Components.ArmedEnemy(temp, map, 100));
+            temp.AddComponent(new Entities.Components.AABBCollider(temp, map, true));
+
+            layer.addEntity(temp);
+            map.InitEntities();
+
         }
 
         protected override void UnloadContent()
@@ -45,9 +67,11 @@ namespace Retribution
 
         protected override void Update(GameTime gameTime)
         {
+            Input.Update();
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            sceneGraph.Update(gameTime.ElapsedGameTime.Milliseconds/1000);
+            map.Update((float)gameTime.ElapsedGameTime.Milliseconds/1000);
 
             base.Update(gameTime);
         }
@@ -56,7 +80,8 @@ namespace Retribution
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            sceneGraph.Draw(spriteBatch);
+            map.Draw(spriteBatch);
+            healthBar.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }

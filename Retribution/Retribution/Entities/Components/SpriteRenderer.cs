@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Retribution.Entities.Components
@@ -9,14 +10,24 @@ namespace Retribution.Entities.Components
         
         private Rectangle m_destRect;
 
-        public SpriteRenderer(Texture2D tex, Entity entity) : base(entity)
+        public SpriteRenderer(Texture2D tex, bool setDimsToTexDims, Entity entity) : base(entity, ComponentType.SpriteRenderer)
         {
             m_tex = tex;
+            if (setDimsToTexDims)
+                entity.SetDims(new Vector2(tex.Width, tex.Height));
             m_destRect.Width = tex.Width;
             m_destRect.Height = tex.Height;
         }
 
+        public override void PreUpdate(float dt)
+        {
+        }
+
         public override void Update(float dt)
+        {
+        }
+
+        public override void PostUpdate(float dt)
         {
         }
 
@@ -27,10 +38,13 @@ namespace Retribution.Entities.Components
             spriteBatch.Draw(m_tex, m_destRect, Color.White);
         }
 
-        public override void SendMsg(string msg)
+        public override void Msg(string msg, params object[] args)
         {
             //actually for recieveing msgs
         }
 
+        public override void Init()
+        {
+        }
     }
 }
