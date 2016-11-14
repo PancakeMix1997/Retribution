@@ -97,7 +97,7 @@ namespace Retribution.Entities
 
         public bool LineCast(Vector2 a, Vector2 b)
         {
-            //dist / 
+            //dist 
             int scanAmt = (int)(Vector2.Distance(a, b) / (float)Math.Sqrt(m_tileWidth ^ 2 * m_tileHeight ^ 2)*3);
 
             float xSlope = (b.X - a.X) / scanAmt;
@@ -219,14 +219,13 @@ namespace Retribution.Entities
         {
             m_guiLayers.Clear();
         }
-        
-        public void NewLayer()
-        {
-            m_layers.Add(new Layer(this));
-        }
 
         public Layer GetLayer(int depth)
         {
+            while(m_layers.Count <= depth)
+            {
+                m_layers.Add(new Layer(this));
+            }
             return m_layers[depth];
         }
 

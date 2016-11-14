@@ -21,6 +21,13 @@ namespace Retribution.Entities
         public string Tag { get; set; }
         public bool Deleted { get; set; }
 
+        public Entity()
+        {
+            Name = "Default";
+            Tag = "Default";
+            m_components = new List<Component>();
+        }
+
         public Entity(string name, string tag)
         {
             Name = name;

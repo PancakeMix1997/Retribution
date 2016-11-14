@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Xml;
 
 namespace Retribution.Entities.Components
 {
@@ -16,6 +17,22 @@ namespace Retribution.Entities.Components
         public bool CollisionResolved { get; set; }
         private Entity[] m_ignore;
 
+
+        public AABBCollider(XmlNodeList nodelist, Map map, Entity entity) : base(entity, ComponentType.AABBCollider)
+        {
+            CanMove = false;
+            foreach (XmlNode node in nodelist)
+            {
+                switch (node.Name)
+                {
+                    case "canMove":
+                        CanMove = true;
+                        break;
+                }
+            }
+            m_map = map;
+            Rect = new Rectangle((int)m_entity.GetPos().X, (int)m_entity.GetPos().Y, (int)m_entity.GetDims().X, (int)m_entity.GetDims().Y);
+        }
 
         public AABBCollider (Entities.Entity entity, Map map, bool canMove) : base(entity, ComponentType.AABBCollider)
         {

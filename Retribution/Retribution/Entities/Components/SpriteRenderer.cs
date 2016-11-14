@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using System.Xml;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Retribution.Entities.Components
@@ -9,6 +10,24 @@ namespace Retribution.Entities.Components
         private Texture2D m_tex;
         
         private Rectangle m_destRect;
+
+        public SpriteRenderer(XmlNodeList nodelist, Entity entity) : base(entity, ComponentType.SpriteRenderer)
+        {
+            foreach (XmlNode node in nodelist)
+            {
+                switch (node.Name)
+                {
+                    case "image":
+                        m_tex = Management.ResourceManager.GetTexture(node.InnerText);
+                        m_destRect.Width = m_tex.Width;
+                        m_destRect.Height = m_tex.Height;
+                        break;
+                    case "ResizeToDims":
+                        entity.SetDims(new Vector2(m_tex.Width, m_tex.Height));
+                        break;
+                }
+            }
+        }
 
         public SpriteRenderer(Texture2D tex, bool setDimsToTexDims, Entity entity) : base(entity, ComponentType.SpriteRenderer)
         {

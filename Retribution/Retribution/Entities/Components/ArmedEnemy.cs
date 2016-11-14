@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Xml;
 
 namespace Retribution.Entities.Components
 {
@@ -19,6 +20,25 @@ namespace Retribution.Entities.Components
         private float m_shootFrequency;
         private float m_bulletSpeed;
 
+        public ArmedEnemy(XmlNodeList nodelist, Entities.Entity entity, Map map) : base(entity, ComponentType.ArmedEnemy)
+        {
+            foreach (XmlNode node in nodelist)
+            {
+                switch (node.Name)
+                {
+                    case "health":
+                        m_health = int.Parse(node.InnerText);
+                        break;
+                }
+            }
+            m_hitTimer = 0;
+            m_faceing = Direction.Left;
+            m_map = map;
+            
+            m_shootFrequency = 1.0f;
+            m_bulletSpeed = 600.0f;
+        }
+
         public ArmedEnemy(Entities.Entity entity, Map map,int health) : base(entity, ComponentType.ArmedEnemy)
         {
             m_hitTimer = 0;
@@ -26,7 +46,7 @@ namespace Retribution.Entities.Components
             m_map = map;
             m_health = health;
             m_shootFrequency = 1.0f;
-            m_bulletSpeed = 500.0f;
+            m_bulletSpeed = 600.0f;
         }
 
         public ArmedEnemy(Entities.Entity entity, Map map, int health, float shootFrequency, float bulletSpeed) : base(entity, ComponentType.ArmedEnemy)

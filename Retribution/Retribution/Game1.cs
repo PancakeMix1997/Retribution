@@ -33,8 +33,7 @@ namespace Retribution
             maploader = new Management.MapLoader();
             Management.ResourceManager.Init(Content);
             maploader.Load(map, "C:/Users/Raymond/Documents/Visual Studio 2015/Projects/Retribution/Retribution/Maps/Level1.xml");
-
-            map.NewLayer();
+            /*
             Entities.Layer layer = map.GetLayer(0);
 
 
@@ -45,7 +44,6 @@ namespace Retribution
             temp.AddComponent(new Entities.Components.PlayerController(temp));
             temp.AddComponent(new Entities.Components.AABBCollider(temp, map, true));
 
-            healthBar = new Entities.HealthBar(temp, Content.Load<Texture2D>("FullHealth"), Content.Load<Texture2D>("2ThirdsHealth"), Content.Load<Texture2D>("LowHealth"));
 
             layer.addEntity(temp);
 
@@ -56,6 +54,9 @@ namespace Retribution
             temp.AddComponent(new Entities.Components.AABBCollider(temp, map, true));
 
             layer.addEntity(temp);
+            */
+            healthBar = new Entities.HealthBar(map.GetEntity(0,"player"), Content.Load<Texture2D>("FullHealth"), Content.Load<Texture2D>("2ThirdsHealth"), Content.Load<Texture2D>("LowHealth"));
+
             map.InitEntities();
 
         }

@@ -21,6 +21,7 @@ namespace Retribution.Entities.Components
         private const float JUMPVEL = 10.0f;
         private const float HORIZONTAL_DAMPING = 0.1f;
 
+
         public PlayerController(Entity entity) : base(entity, ComponentType.PlayerController)
         {
             m_onWall = Direction.None;
