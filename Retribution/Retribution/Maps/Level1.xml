@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Map>
+    <Backround>
+        CreepyCave
+    </Backround>
+
+    <TileSheet Tileset = "Dungeon tileset" TileWidth ="166" TileHeight = "166"/>
+
+    <Static Width = "10" Height = "4">
+    0,0,1,0,0,0,1,1,1,0,
+    1,0,0,1,1,0,0,1,1,0,
+    1,1,1,1,1,1,1,0,1,0,
+    1,1,1,1,1,1,1,1,1,1
+    </Static>
+
+  <Dynamic>
+    <Layer Depth = "0">
+      <Entity>
+        <pos X ="0" Y ="0"/>
+        <tag>Good</tag>
+        <name>player</name>
+        <SpriteRenderer>
+            <image>TestPlayer</image>
+            <ResizeToDims></ResizeToDims>
+        </SpriteRenderer>
+        <AABBCollider>
+          <canMove></canMove>
+        </AABBCollider>
+        <PlayerController></PlayerController>
+      </Entity>
+    
+      <Entity>
+        <pos X ="100" Y ="0"/>
+        <tag>enemy</tag>
+        <name>Bad</name>
+        <SpriteRenderer>
+            <image>testEnemy</image>
+            <ResizeToDims></ResizeToDims>
+        </SpriteRenderer>
+        <AABBCollider>
+          <canMove></canMove>
+        </AABBCollider>
+        <ArmedEnemy>
+          <health>100</health>
+        </ArmedEnemy>
+      </Entity>  
+    </Layer>
+  </Dynamic>
+</Map>

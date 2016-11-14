@@ -28,11 +28,17 @@ namespace Retribution
 
         protected override void LoadContent()
         {
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             map = new Entities.Map();
             maploader = new Management.MapLoader();
             Management.ResourceManager.Init(Content);
-            maploader.Load(map, "C:/Users/Raymond/Documents/Visual Studio 2015/Projects/Retribution/Retribution/Maps/Level1.xml");
+            // ./ returns exe location 
+            //for release version
+            //maploader.Load(map, "./Maps/Level1.xml");
+
+            maploader.Load(map, @"C:\Users\Raymond\Source\Repos\Retribution\Retribution\Retribution\Maps\Level1.xml");
+
             /*
             Entities.Layer layer = map.GetLayer(0);
 
