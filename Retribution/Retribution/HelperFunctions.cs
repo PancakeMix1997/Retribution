@@ -10,6 +10,16 @@ namespace Retribution
 {
     static class HelperFunctions
     {
+        public static bool PointIntersect(Point a, Rectangle b)
+        {
+            if (b.X <= a.X)
+                if (b.Y <= a.Y)
+                    if (b.Right >= a.X)
+                        if (b.Bottom >= a.Y)
+                            return true;
+            return false;
+        }
+
         public static Tuple<Vector2, Direction> RectIntersect(Rectangle a, Rectangle b)
         {
             Rectangle test = Rectangle.Intersect(a, b);

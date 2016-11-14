@@ -95,6 +95,39 @@ namespace Retribution.Entities
                 i.InitEntities();
         }
 
+        public bool LineCast(Vector2 a, Vector2 b)
+        {
+            //dist / 
+            int scanAmt = (int)(Vector2.Distance(a, b) / (float)Math.Sqrt(m_tileWidth ^ 2 * m_tileHeight ^ 2)*3);
+
+            float xSlope = (b.X - a.X) / scanAmt;
+            float ySlope = (b.Y - a.Y) / scanAmt;
+
+
+            var tileRect = new Rectangle();
+            tileRect.Width = m_tileWidth;
+            tileRect.Height = m_tileHeight;
+
+
+            Vector2 curPos = new Vector2(a.X,a.Y);
+            for (float i = 0; i < scanAmt; i++)
+            {
+                int tileMapPosx = (int)curPos.X / m_tileWidth;
+                int tileMapPosy = (int)curPos.Y / m_tileHeight;
+                if (m_tileMap[tileMapPosx,tileMapPosy] != 0)
+                {
+                    tileRect.X = tileMapPosx * m_tileWidth;
+                    tileRect.Y = tileMapPosy * m_tileHeight;
+                    if (HelperFunctions.PointIntersect(curPos.ToPoint(), tileRect))
+                        return true;
+                }
+                curPos.X += xSlope;
+                curPos.Y += ySlope;
+            }
+
+            return false;
+        }
+
         public Tuple<Vector2,Direction,Direction> GetCollision(Rectangle bounds)
         {
             Vector2 collisRect = new Vector2();
@@ -146,13 +179,18 @@ namespace Retribution.Entities
                 }
             }
 
-            
+            var tileRect = new Rectangle();
+            tileRect.Width = m_tileWidth;
+            tileRect.Height = m_tileHeight;
 
             for (int i = 0; i < closestTilesArray.Length; i++)
             {
                 closestTilesArray[i].X -= (float)m_tileWidth / 2;
                 closestTilesArray[i].Y -= (float)m_tileHeight / 2;
-                var intersection = HelperFunctions.RectIntersect(bounds, new Rectangle(closestTilesArray[i].ToPoint(), new Point(m_tileWidth, m_tileHeight)));
+
+                tileRect.Location = closestTilesArray[i].ToPoint();     
+
+                var intersection = HelperFunctions.RectIntersect(bounds, tileRect);
                 collisRect += intersection.Item1;
                 bounds.X += (int)intersection.Item1.X;
                 bounds.Y += (int)intersection.Item1.Y;
