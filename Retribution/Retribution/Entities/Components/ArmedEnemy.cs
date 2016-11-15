@@ -108,8 +108,9 @@ namespace Retribution.Entities.Components
                     {
                         var layer = m_map.GetLayer(0);
                         Entity temp = new Entity("bullet", "Projectile");
+                        temp.SetDims(new Vector2(1, 1));
                         temp.AddComponent(new Projectile(temp, m_map, m_entity, m_aiming, m_bulletSpeed, 1));
-                        temp.AddComponent(new SpriteRenderer(Management.ResourceManager.GetTexture("bullet1"), true, temp));
+                        temp.AddComponent(new SpriteRenderer(Management.ResourceManager.GetTexture("bullet1"), false, temp));
                         temp.AddComponent(new AABBCollider(temp, m_map, true, m_entity));
                         temp.SetCenter(m_entity.GetCenter());
                         layer.addEntity(temp);

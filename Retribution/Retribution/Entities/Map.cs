@@ -98,7 +98,7 @@ namespace Retribution.Entities
         public bool LineCast(Vector2 a, Vector2 b)
         {
             //dist 
-            int scanAmt = (int)(Vector2.Distance(a, b) / (float)Math.Sqrt(m_tileWidth ^ 2 * m_tileHeight ^ 2)*3);
+            int scanAmt = (int)(Vector2.Distance(a, b) / (float)Math.Sqrt(m_tileWidth ^ 2 * m_tileHeight ^ 2) * 50);
 
             float xSlope = (b.X - a.X) / scanAmt;
             float ySlope = (b.Y - a.Y) / scanAmt;
@@ -109,15 +109,40 @@ namespace Retribution.Entities
             tileRect.Height = m_tileHeight;
 
 
-            Vector2 curPos = new Vector2(a.X,a.Y);
+            Vector2 curPos = new Vector2(a.X, a.Y);
             for (float i = 0; i < scanAmt; i++)
             {
-                int tileMapPosx = (int)curPos.X / m_tileWidth;
-                int tileMapPosy = (int)curPos.Y / m_tileHeight;
-                if (m_tileMap[tileMapPosx,tileMapPosy] != 0)
+                Point topLeft, topRight, botLeft, botRight;
+                topLeft = new Point((int)curPos.X / m_tileWidth, (int)curPos.Y / m_tileHeight);
+                botLeft = new Point((int)curPos.X / m_tileWidth, (int)Math.Ceiling(curPos.Y / m_tileHeight));
+                topRight = new Point((int)Math.Ceiling(curPos.X / m_tileWidth), (int)curPos.Y / m_tileHeight);
+                botRight = new Point((int)Math.Ceiling(curPos.X / m_tileWidth), (int)Math.Ceiling(curPos.Y / m_tileHeight));
+
+                if (m_tileMap[topLeft.X, topLeft.Y] != 0)
                 {
-                    tileRect.X = tileMapPosx * m_tileWidth;
-                    tileRect.Y = tileMapPosy * m_tileHeight;
+                    tileRect.X = topLeft.X * m_tileWidth;
+                    tileRect.Y = topLeft.Y * m_tileHeight;
+                    if (HelperFunctions.PointIntersect(curPos.ToPoint(), tileRect))
+                        return true;
+                }
+                if (m_tileMap[botLeft.X, botLeft.Y] != 0)
+                {
+                    tileRect.X = botLeft.X * m_tileWidth;
+                    tileRect.Y = botLeft.Y * m_tileHeight;
+                    if (HelperFunctions.PointIntersect(curPos.ToPoint(), tileRect))
+                        return true;
+                }
+                if (m_tileMap[topRight.X, topRight.Y] != 0)
+                {
+                    tileRect.X = topRight.X * m_tileWidth;
+                    tileRect.Y = topRight.Y * m_tileHeight;
+                    if (HelperFunctions.PointIntersect(curPos.ToPoint(), tileRect))
+                        return true;
+                }
+                if (m_tileMap[botRight.X, botRight.Y] != 0)
+                {
+                    tileRect.X = botRight.X * m_tileWidth;
+                    tileRect.Y = botRight.Y * m_tileHeight;
                     if (HelperFunctions.PointIntersect(curPos.ToPoint(), tileRect))
                         return true;
                 }
