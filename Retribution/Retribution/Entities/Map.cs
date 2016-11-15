@@ -21,7 +21,6 @@ namespace Retribution.Entities
     {
         private Texture2D m_backroundImage;
         private List<Layer> m_layers;
-        private List<Layer> m_guiLayers;
         private Texture2D m_tileSheet;
         private int[,] m_tileMap;
         private int m_tileWidth, m_tileHeight;
@@ -238,11 +237,6 @@ namespace Retribution.Entities
         public void ClearMap()
         {
             m_layers.Clear();
-        }
-
-        public void ClearGui()
-        {
-            m_guiLayers.Clear();
         }
 
         public Layer GetLayer(int depth)

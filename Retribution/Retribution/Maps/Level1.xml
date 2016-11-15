@@ -31,8 +31,8 @@
     
       <Entity>
         <pos X ="100" Y ="0"/>
-        <tag>enemy</tag>
-        <name>Bad</name>
+        <tag>Bad</tag>
+        <name>enemy</name>
         <SpriteRenderer>
             <image>testEnemy</image>
             <ResizeToDims></ResizeToDims>

@@ -8,7 +8,8 @@ namespace Retribution.Entities.Components
         PlayerController,
         SpriteRenderer,
         ArmedEnemy,
-        Projectile
+        Projectile,
+        Camera
     }
 
     abstract class Component

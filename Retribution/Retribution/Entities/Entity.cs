@@ -15,7 +15,7 @@ namespace Retribution.Entities
         private List<Component> m_components;
         private Vector2 m_pos;
         private Vector2 m_center;
-        private Vector2 m_rot;
+        private float m_rot;
         private Vector2 m_dims;
         public string Name { get; set; }
         public string Tag { get; set; }
@@ -35,6 +35,11 @@ namespace Retribution.Entities
             m_components = new List<Component>();
         }
 
+        public float GetRot()
+        {
+            return m_rot;
+        }
+
         public void SetDims(Vector2 Dims)
         {
             m_dims = Dims;
@@ -48,6 +53,16 @@ namespace Retribution.Entities
         public Vector2 GetPos()
         {
             return m_pos;
+        }
+
+        public float GetXPos()
+        {
+            return m_pos.X;
+        }
+
+        public float GetYPos()
+        {
+            return m_pos.Y;
         }
 
         public Vector2 GetCenter()

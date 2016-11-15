@@ -13,6 +13,8 @@ namespace Retribution
         Entities.Map map;
         Management.MapLoader maploader;
         Entities.HealthBar healthBar;
+        Entities.Components.Camera camera;
+
 
         public Game1()
         {
@@ -63,6 +65,12 @@ namespace Retribution
             */
             healthBar = new Entities.HealthBar(map.GetEntity(0,"player"), Content.Load<Texture2D>("FullHealth"), Content.Load<Texture2D>("2ThirdsHealth"), Content.Load<Texture2D>("LowHealth"));
 
+            //add camera
+            
+            var player = map.GetEntity(0, "player");
+            camera = new Entities.Components.Camera(player,800,600);
+            player.AddComponent(camera);
+
             map.InitEntities();
 
         }
@@ -86,11 +94,18 @@ namespace Retribution
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            
+            //Level
+            spriteBatch.Begin(SpriteSortMode.Deferred,null,null,null,null,null,camera.GetMat());
             map.Draw(spriteBatch);
+            spriteBatch.End();
+
+            //Gui
+            spriteBatch.Begin();
             healthBar.Draw(spriteBatch);
             spriteBatch.End();
-            base.Draw(gameTime);
+
+           base.Draw(gameTime);
         }
     }
 }

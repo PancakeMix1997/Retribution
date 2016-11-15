@@ -41,6 +41,7 @@
     <Compile Include="Entities\CollisionManager.cs" />
     <Compile Include="Entities\Components\AABBCollider.cs" />
     <Compile Include="Entities\Components\ArmedEnemy.cs" />
+    <Compile Include="Entities\Components\Camera.cs" />
     <Compile Include="Entities\Components\Component.cs" />
     <Compile Include="Entities\Components\PlayerController.cs" />
     <Compile Include="Entities\Components\Projectile.cs" />
